@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>AR Robotica - Shogun Mini Sumo</title>
+    
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      /* Ecranul de incarcare / scanare */
+      #scanning-overlay {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0; right: 0; top: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        z-index: 10;
+        text-align: center;
+        padding: 20px;
+      }
+      #scanning-overlay.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="scanning-overlay">
+      <div>Se incarca...<br>Indreapta camera catre robotel pentru a vedea specificatiile!</div>
+    </div>
+
+    <a-scene 
+      mindar-image="imageTargetSrc: ./targets.mind; uiScanning: #scanning-overlay;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+      
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-assets>
+        <a-mixin id="textStyle" text="color: white; align: center; wrapCount: 22; width: 0.9;"></a-mixin>
+        <a-mixin id="panelStyle" geometry="primitive: plane; height: 0.5; width: 1.1" material="opacity: 0.85; transparent: true;"></a-mixin>
+      </a-assets>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity mixin="panelStyle" material="color: #2980b9" position="0 0.4 0" scale="0.7 0.7 0.7">
+          <a-text value="XMOTION CONTROLLER\nProcesor: ATmega328P\nDrivere: Dual 6A\nTensiune: 7-28V" mixin="textStyle"></a-text>
+        </a-entity>
+        
+        <a-entity mixin="panelStyle" material="color: #c0392b" position="0 -0.4 0" scale="0.6 0.6 0.6">
+          <a-text value="BATERIE LIPO\nCapacitate: 450mAh\nVoltaj: 11.1V (3S)" mixin="textStyle"></a-text>
+        </a-entity>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity mixin="panelStyle" material="color: #d35400" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="SENZORI PROXIMITATE\nModel: JS40F (IR)\nDistanta detectie: 60cm\nTimp raspuns: < 1ms" mixin="textStyle"></a-text>
+        </a-entity>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-entity mixin="panelStyle" material="color: #f39c12" position="0 0.4 0" scale="0.8 0.8 0.8">
+          <a-text value="SASIUD & GREUTATI\nMaterial: Alama solida\nRol: Stabilitate si tractiune\nLogo: JSUMO" mixin="textStyle" text="color: black;"></a-text>
+        </a-entity>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-entity mixin="panelStyle" material="color: #27ae60" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="MOTOR JS40 (STANGA)\nViteza: 400-600 RPM\nCuplu: ~5kg/cm\nAngrenaje: Metalice" mixin="textStyle"></a-text>
+        </a-entity>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-entity mixin="panelStyle" material="color: #27ae60" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="MOTOR JS40 (DREAPTA)\nViteza: 400-600 RPM\nCuplu: ~5kg/cm\nAngrenaje: Metalice" mixin="textStyle"></a-text>
+        </a-entity>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
