@@ -11,17 +11,25 @@
     <style>
       body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; }
       
+      /* Am scos pelicula neagra de peste tot ecranul */
       #scanning-overlay {
-        display: flex; align-items: center; justify-content: center;
+        display: flex; align-items: flex-start; justify-content: center;
         position: absolute; left: 0; right: 0; top: 0; bottom: 0;
-        background: rgba(0, 0, 0, 0.8); color: white;
-        font-size: 18px; z-index: 10; text-align: center; padding: 20px;
+        background: transparent; /* Aici era problema! Acum e transparent */
+        z-index: 10; text-align: center; padding-top: 60px;
+        pointer-events: none;
       }
-      #scanning-overlay.hidden { display: none; }
       
-      /* Butonul pentru Audio */
+      /* Punem putin negru DOAR in spatele textului, ca o eticheta */
+      #scanning-overlay div {
+        background: rgba(0, 0, 0, 0.7);
+        color: white; font-size: 16px;
+        padding: 10px 20px; border-radius: 10px;
+      }
+      
+      /* Am mutat butonul mai sus (bottom: 120px) ca sa nu se ascunda sub meniul Safari */
       #start-audio-btn {
-        position: absolute; bottom: 30px; left: 50%;
+        position: absolute; bottom: 120px; left: 50%;
         transform: translateX(-50%);
         padding: 15px 30px;
         background-color: #2ecc71; color: white;
