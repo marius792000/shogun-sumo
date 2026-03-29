@@ -3,185 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>AR Scanner Audio - Robot & Cheie</title>
+    <title>AR Scanner - Identificare Chei</title>
     
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     
     <style>
-      body { margin: 0; overflow: hidden; }
+      body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; }
+      
       #scanning-overlay {
         display: flex; align-items: center; justify-content: center;
         position: absolute; left: 0; right: 0; top: 0; bottom: 0;
-        background: rgba(0, 0, 0, 0.7); color: white;
-        font-family: Arial, sans-serif; font-size: 18px; z-index: 10;
-        text-align: center; padding: 20px;
+        background: rgba(0, 0, 0, 0.8); color: white;
+        font-size: 18px; z-index: 10; text-align: center; padding: 20px;
       }
       #scanning-overlay.hidden { display: none; }
       
-      /* Buton pentru a activa audio (necesar din cauza politicii browserului) */
+      /* Butonul pentru Audio */
       #start-audio-btn {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
+        position: absolute; bottom: 30px; left: 50%;
         transform: translateX(-50%);
-        padding: 10px 20px;
-        background-color: #e74c3c;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 18px;
-        cursor: pointer;
-        z-index: 20;
+        padding: 15px 30px;
+        background-color: #2ecc71; color: white;
+        border: none; border-radius: 10px;
+        font-size: 18px; font-weight: bold;
+        cursor: pointer; z-index: 20;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
       }
     </style>
   </head>
   <body>
     
     <div id="scanning-overlay">
-      <div>Se incarca...<br>Indreapta camera catre robot sau cheie!</div>
+      <div>Sistemul AR pornește...<br><br>Îndreaptă camera către o cheie pentru a o scana.</div>
     </div>
 
-    <button id="start-audio-btn">Activează Audio</button>
+    <button id="start-audio-btn">🔊 Activează Asistentul Vocal</button>
 
     <a-scene mindar-image="imageTargetSrc: ./targets.mind; uiScanning: #scanning-overlay;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-assets>
-        <a-mixin id="infoText" text="color: white; align: center; wrapCount: 22; width: 0.9;"></a-mixin>
-        <a-mixin id="panelBase" geometry="primitive: plane; height: 0.4; width: 1.0" material="opacity: 0.85; transparent: true;"></a-mixin>
+        <a-mixin id="infoText" text="color: white; align: center; wrapCount: 20; width: 0.9;"></a-mixin>
+        <a-mixin id="panelBase" geometry="primitive: plane; height: 0.4; width: 1.1" material="opacity: 0.9; transparent: true;"></a-mixin>
       </a-assets>
 
-      <a-entity mindar-image-target="targetIndex: 0" id="target-robot-up">
-        <a-entity mixin="panelBase" material="color: #2980b9" position="0 0.4 0.05" scale="0.7 0.7 0.7">
-          <a-text value="XMOTION CONTROLLER\nProcesor: ATmega328P\nDrivere: Dual 6A\nTensiune: 7-28V" mixin="infoText"></a-text>
-        </a-entity>
-        <a-entity mixin="panelBase" material="color: #c0392b" position="0 -0.4 0.05" scale="0.6 0.6 0.6">
-          <a-text value="BATTERIE LiPo\nCapacitate: 450mAh\nConfig: 3S (11.1V)\nTip: Lipo" mixin="infoText"></a-text>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity mixin="panelBase" material="color: #2c3e50" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="CHEIE AUTO\nTip: Telecomandă Fob\nButoane: Închis, Deschis, Portbagaj" mixin="infoText"></a-text>
         </a-entity>
       </a-entity>
 
-      <a-entity mindar-image-target="targetIndex: 1" id="target-robot-front">
-        <a-entity mixin="panelBase" material="color: #d35400" position="0 0.1 0.1" scale="0.7 0.7 0.7">
-          <a-text value="SENZORI PROXIMITATE\nModel: JS40F (IR)\nDistanta detec: 60cm\nTimp raspuns: <1ms" mixin="infoText"></a-text>
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-entity mixin="panelBase" material="color: #2c3e50" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="CHEIE AUTO\nTip: Telecomandă Fob\nButoane: Închis, Deschis, Portbagaj" mixin="infoText"></a-text>
         </a-entity>
       </a-entity>
 
-      <a-entity mindar-image-target="targetIndex: 2" id="target-robot-back">
-        <a-entity mixin="panelBase" material="color: #f1c40f" position="0 0.3 0.1" scale="0.7 0.7 0.7">
-          <a-text value="SASIUD & GREUTATI\nMaterial: Alama solida\nRol: Tractiune si stabilitate\nLogo: JSUMO" mixin="infoText" text="color: black;"></a-text>
+
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-entity mixin="panelBase" material="color: #8e44ad" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="CHEIE LABORATOR\nAcces: Sala de Robotică\nIdentificare: Capăt violet" mixin="infoText"></a-text>
         </a-entity>
       </a-entity>
 
-      <a-entity mindar-image-target="targetIndex: 3" id="target-robot-left">
-        <a-entity mixin="panelBase" material="color: #27ae60" position="0 0.3 0" scale="0.8 0.8 0.8">
-          <a-text value="MOTOR JS40 (STG)\nViteza: 400-600 RPM\nCuplu: ~5kg/cm\nAngrenaje Metalice" mixin="infoText"></a-text>
-        </a-entity>
-      </a-entity>
-
-      <a-entity mindar-image-target="targetIndex: 4" id="target-robot-right">
-        <a-entity mixin="panelBase" material="color: #27ae60" position="0 0.3 0" scale="0.8 0.8 0.8">
-          <a-text value="MOTOR JS40 (DRT)\nViteza: 400-600 RPM\nCuplu: ~5kg/cm\nAngrenaje Metalice" mixin="infoText"></a-text>
-        </a-entity>
-      </a-entity>
-
-      <a-entity mindar-image-target="targetIndex: 5" id="target-key-up">
-        <a-entity mixin="panelBase" material="color: #8e44ad" position="0.1 0.2 0.05" scale="0.5 0.5 0.5">
-          <a-text value="PARTE SUPERIOARĂ\nCapul de siguranta violet\nOfera priza si indentificare" mixin="infoText"></a-text>
-        </a-entity>
-        <a-entity mixin="panelBase" material="color: #7f8c8d" position="-0.3 -0.1 0.05" scale="0.5 0.5 0.5">
-          <a-text value="PARTE INFERIOARĂ\nLama si dintii cheii\nSe introduce in mecanism" mixin="infoText"></a-text>
-        </a-entity>
-        <a-entity mixin="panelBase" material="color: #f39c12" position="0.3 0.1 0.05" scale="0.5 0.5 0.5">
-          <a-text value="INEL DE PRINDERE\nInel metalic solida\nPentru atasare la chei/carlig" mixin="infoText"></a-text>
-        </a-entity>
-      </a-entity>
-
-      <a-entity mindar-image-target="targetIndex: 6" id="target-key-side">
-        <a-entity mixin="panelBase" material="color: #8e44ad" position="-0.1 -0.2 0.05" scale="0.6 0.6 0.6">
-          <a-text value="CAP VIOLET\nOfera identificare vizuala" mixin="infoText"></a-text>
-        </a-entity>
-        <a-entity mixin="panelBase" material="color: #7f8c8d" position="-0.1 0.3 0.05" scale="0.6 0.6 0.6">
-          <a-text value="LAMA CHEII\nContine codul de taiere" mixin="infoText"></a-text>
-        </a-entity>
-        <a-entity mixin="panelBase" material="color: #f39c12" position="0.2 -0.2 0.05" scale="0.6 0.6 0.6">
-          <a-text value="INEL METALIC\nPentru organizare" mixin="infoText"></a-text>
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-entity mixin="panelBase" material="color: #8e44ad" position="0 0.3 0" scale="0.8 0.8 0.8">
+          <a-text value="CHEIE LABORATOR\nAcces: Sala de Robotică\nIdentificare: Capăt violet" mixin="infoText"></a-text>
         </a-entity>
       </a-entity>
 
     </a-scene>
 
     <script>
-      // === Configurația Audio ===
+      // === Sistemul Audio pentru Deficienți de Vedere ===
       
-      const audioEnabled = false;
       let synth = window.speechSynthesis;
       let isAudioActive = false;
+      let lastSpokenIndex = -1; // Previne repetarea continuă a aceluiași mesaj
 
-      // Definim textele audio pentru fiecare tinta (index)
+      // Mesajele audio pentru fiecare index (pozele 0 și 1 sunt mașina, 2 și 3 sunt laboratorul)
       const audioTexts = {
-        0: "Aceasta este o vedere de sus a robotului sumo. Se vede placa electronică albastră XMotion și mufa bateriei.",
-        1: "Aceasta este partea din față a robotului. Se văd cei doi senzori de proximitate portocalii și lama de metal argintie.",
-        2: "Aceasta este partea din spate a robotului. Se văd greutățile din alamă solida și logo-ul JSumo.",
-        3: "Acesta este motorul din partea stângă a robotului. Este un motor JS40 cu angrenaje metalice.",
-        4: "Acesta este motorul din partea dreaptă a robotului. Este un motor JS40 cu angrenaje metalice.",
-        5: "Aceasta este o vedere completă a cheii de siguranță. Are un cap violet și o lamă metalică lungă.",
-        6: "Aceasta este o vedere laterală a cheii de siguranță. Se observă grosimea cheii și inelul de prindere."
+        0: "Am identificat cheia de mașină. Este o telecomandă neagră, dreptunghiulară, cu trei butoane pe ea: pentru blocare, deblocare și deschiderea portbagajului.",
+        1: "Am identificat cheia de mașină. Este o telecomandă neagră cu butoane.",
+        2: "Am identificat cheia laboratorului de robotică. Aceasta este o cheie metalică clasică, având capătul de prindere rotund și de culoare violet.",
+        3: "Am identificat cheia laboratorului de robotică. Cheia are un capăt rotund, violet, și o lamă metalică cu zimți."
       };
 
-      const speak = (text) => {
-        if (!isAudioActive) return; // Nu vorbeste daca audio nu e activat
+      const speak = (text, index) => {
+        if (!isAudioActive) return; 
+        if (index === lastSpokenIndex) return; // Dacă tocmai a zis asta, nu repeta obsesiv
         
-        // Opreste orice vorbire anterioara
-        synth.cancel();
-
+        synth.cancel(); // Oprește vorbirea anterioară
+        
         let utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ro-RO'; // Seteaza limba romana
-        utterance.pitch = 1; // Tonul vocii
-        utterance.rate = 1; // Viteza de vorbire
-
-        // Optional: Poti alege o voce specifica, dar depinde de browser
-        // let voices = synth.getVoices();
-        // utterance.voice = voices[0]; // Alege prima voce disponibila
+        utterance.lang = 'ro-RO';
+        utterance.pitch = 1;
+        utterance.rate = 0.95; // O idee mai rar pentru claritate
 
         synth.speak(utterance);
+        lastSpokenIndex = index;
+
+        // Resetează indexul după 5 secunde pentru a putea fi scanată din nou mai târziu
+        setTimeout(() => {
+            if(lastSpokenIndex === index) lastSpokenIndex = -1;
+        }, 5000);
       };
 
-      // === Logica de detectie a țintelor ===
-
-      // Așteptăm ca scena să se încarce
+      // Detectarea obiectelor de către cameră
       document.querySelector('a-scene').addEventListener('loaded', function () {
-        console.log("Scena AR s-a încărcat");
-
-        // Obținem toate entitățile care sunt ținte AR
         const targets = document.querySelectorAll('[mindar-image-target]');
 
         targets.forEach((target) => {
           target.addEventListener('targetFound', event => {
-            console.log("Tinta gasita:", target.id);
             const index = target.getAttribute('mindar-image-target').targetIndex;
             const textToSpeak = audioTexts[index];
             if (textToSpeak) {
-              speak(textToSpeak);
+              speak(textToSpeak, index);
             }
-          });
-
-          target.addEventListener('targetLost', event => {
-            console.log("Tinta pierduta:", target.id);
-            // Optional: Opreste vorbirea cand pierde tinta
-            // synth.cancel();
           });
         });
       });
 
-      // === Logica Butonului de Start Audio ===
-      // Browserele moderne blochează redarea automată a audio-ului fără o interacțiune a utilizatorului.
+      // Activarea sistemului la apăsarea butonului
       const startAudioBtn = document.getElementById('start-audio-btn');
       startAudioBtn.addEventListener('click', () => {
         isAudioActive = true;
-        speak("Audio activat. Indreapta camera catre un obiect.");
-        startAudioBtn.style.display = 'none'; // Ascunde butonul după activare
+        
+        // Un mic mesaj de bun venit pentru confirmare
+        let welcome = new SpeechSynthesisUtterance("Asistentul vocal a fost activat. Scanează o cheie.");
+        welcome.lang = 'ro-RO';
+        synth.speak(welcome);
+        
+        // Ascunde butonul după ce a fost apăsat
+        startAudioBtn.style.display = 'none'; 
       });
 
     </script>
